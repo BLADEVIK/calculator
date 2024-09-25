@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import './App.css';
-
+import * as math from 'mathjs';
 function App() {
   const [result, setResult] = useState('');
 
@@ -9,7 +9,6 @@ function App() {
     setResult(result.concat(e.target.name));
   };
 
-  
   const clear = () => {
     setResult('');
   };
@@ -20,7 +19,7 @@ function App() {
 
   const calculate = () => {
     try {
-      setResult(eval(result).toString());
+      setResult(math.evaluate(result).toString());
     } catch (err) {
       console.error('Ошибка вычисления:', err.message);
       setResult('Ошибка');
@@ -55,7 +54,7 @@ function App() {
   }, [calculate, backspace, clear]);
   return (
     <div className="calculator">
-      <input
+      <input placeholder='Введите данные'
         onChange={(e) => setResult(e.target.value)}
         type="text"
         value={result}
@@ -84,7 +83,7 @@ function App() {
           4
         </button>
         <button name="*" onClick={handleClick}>
-        &times;
+          &times;
         </button>
         <button name="5" onClick={handleClick}>
           5
@@ -96,7 +95,7 @@ function App() {
           1
         </button>
         <button name="-" onClick={handleClick}>
-        &ndash;
+          &ndash;
         </button>
         <button name="2" onClick={handleClick}>
           2
